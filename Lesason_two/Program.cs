@@ -1,28 +1,35 @@
 ﻿Console.Clear();
 
-//FirstExemple();
+FirstExemple();
 SecondExemple();
-//ThreeExemple();
-//FourExemple();
+ThreeExemple();
+FourExemple();
 
 
 void FirstExemple()
 {
-    int first = int.Parse(Console.ReadLine());
-    int second = int.Parse(Console.ReadLine());
+    try
+    {
+        int first = int.Parse(Console.ReadLine()!);
+        int second = int.Parse(Console.ReadLine()!);
 
 
-    if ((second % first) == 0)
-    {
-        Console.WriteLine(second + " делится на " + first);
+        if ((second % first) == 0)
+        {
+            Console.WriteLine(second + " делится на " + first);
+        }
+        else if ((first % second) == 0)
+        {
+            Console.WriteLine(second + " делится на " + first);
+        }
+        else
+        {
+            Console.WriteLine("остаток " + second % first);
+        }
     }
-    else if ((first % second) == 0)
+    catch
     {
-        Console.WriteLine(second + " делится на " + first);
-    }
-    else
-    {
-        Console.WriteLine("остаток " + second % first);
+        FirstExemple();
     }
 }
 
@@ -38,25 +45,40 @@ void SecondExemple()
 
 void ThreeExemple()
 {
-    int value = int.Parse(Console.ReadLine());
+    try
+    {
+        int value = int.Parse(Console.ReadLine()!);
 
-    if (value % 7 == 0 && value % 23 == 0)
-    {
-        Console.WriteLine("yeeees");
+        if (value % 7 == 0 && value % 23 == 0)
+        {
+            Console.WriteLine("yeeees");
+        }
+        else
+        {
+            Console.WriteLine("Oh no");
+        }
     }
-    else
+    catch
     {
-        Console.WriteLine("Oh no");
+        ThreeExemple();
     }
 }
 
 void FourExemple()
 {
-    Console.Write("Введите первое число: ");
-    int first = int.Parse(Console.ReadLine());
-    Console.Write("Введите второе число: ");
-    int second = int.Parse(Console.ReadLine());
-    Console.WriteLine(CheckSquare(first,second));
+    try
+    {
+        Console.Write("Введите первое число: ");
+        int first = int.Parse(Console.ReadLine()!);
+        Console.Write("Введите второе число: ");
+        int second = int.Parse(Console.ReadLine()!);
+        Console.WriteLine(CheckSquare(first, second));
+    }
+    catch
+    {
+        FourExemple();
+    }
+
 }
 
 
@@ -64,12 +86,13 @@ void FourExemple()
 // 
 string CheckSquare(int a, int b)
 {
-    if (Math.Pow(a,2)==b ^ Math.Pow(b,2)==a){
+    if (Math.Pow(a, 2) == b ^ Math.Pow(b, 2) == a)
+    {
         return "да ";
     }
     else
     {
         return "нет";
     }
-    
+
 }
