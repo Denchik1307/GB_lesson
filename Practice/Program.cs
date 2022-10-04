@@ -4,26 +4,33 @@ Select_exisize();
 
 void Select_exisize()
 {
-    Console.Write("Введите номер задачи (10, 13 или 15): ");
-    int number_exisize = int.Parse(Console.ReadLine());
-
-    switch (number_exisize)
+    try
     {
+        Console.Write("Введите номер задачи (10, 13 или 15): ");
+        int number_exisize = int.Parse(Console.ReadLine()!);
 
-        case 10:
-            HomeworkTen();
-            break;
-        case 13:
-            HomeworkThirteen();
-            break;
-        case 15:
-            HomeworkFourteen();
-            break;
-        default:
-            Console.Clear();
-            Error();
-            Select_exisize();
-            break;
+        switch (number_exisize)
+        {
+
+            case 10:
+                HomeworkTen();
+                break;
+            case 13:
+                HomeworkThirteen();
+                break;
+            case 15:
+                HomeworkFourteen();
+                break;
+            default:
+                Error();
+                Select_exisize();
+                break;
+        }
+    }
+    catch
+    {
+        Error();
+        Select_exisize();
     }
 }
 
@@ -32,16 +39,15 @@ void HomeworkTen()
     try
     {
         Console.Write("Введите трёхзначное число: ");
-        string number_exisize = Console.ReadLine();
-        if (number_exisize.Length != 3)
+        string number = Console.ReadLine()!;
+        if (number.Length != 3)
         {
             Error();
             HomeworkTen();
         }
         else
         {
-            Console.WriteLine(number_exisize[1].ToString());
-
+            Console.WriteLine(number[1].ToString());
         }
     }
     catch
@@ -56,14 +62,14 @@ void HomeworkThirteen()
     try
     {
         Console.Write("Введите число: ");
-        string number_exisize = Console.ReadLine();
-        if (number_exisize.Length < 3)
+        string someNumber = Console.ReadLine()!;
+        if (someNumber.Length < 3)
         {
             Console.WriteLine("Здесь нет третьей цифры!");
         }
         else
         {
-            Console.WriteLine(number_exisize[2].ToString());
+            Console.WriteLine(someNumber[2].ToString());
 
         }
     }
@@ -76,18 +82,21 @@ void HomeworkThirteen()
 
 void HomeworkFourteen()
 {
+    int startWeak = 1;
+    int endWeak = 7;
+
     try
     {
         Console.Write("Введите порядковый номер дня недели: ");
-        string number_exisize = Console.ReadLine();
-        if (number_exisize.Length != 1)
+        int numberDayWeak = int.Parse(Console.ReadLine()!);
+        if (numberDayWeak >= startWeak && numberDayWeak <= endWeak)
         {
             Error();
             HomeworkFourteen();
         }
         else
         {
-            if (number_exisize == "6" ^ number_exisize == "7")
+            if (numberDayWeak == 6 ^ numberDayWeak == 7)
             {
                 Console.WriteLine("Выходной!!!");
             }
