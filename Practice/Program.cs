@@ -91,11 +91,6 @@ void HomeworkFourteen()
         int numberDayWeak = int.Parse(Console.ReadLine()!);
         if (numberDayWeak >= startWeak && numberDayWeak <= endWeak)
         {
-            Error();
-            HomeworkFourteen();
-        }
-        else
-        {
             if (numberDayWeak == 6 ^ numberDayWeak == 7)
             {
                 Console.WriteLine("Выходной!!!");
@@ -104,6 +99,11 @@ void HomeworkFourteen()
             {
                 Console.WriteLine("Будний :'(");
             }
+        }
+        else
+        {
+            Error();
+            HomeworkFourteen();
         }
     }
     catch
