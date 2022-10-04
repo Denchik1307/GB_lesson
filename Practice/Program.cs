@@ -11,7 +11,6 @@ void Select_exisize()
 
         switch (number_exisize)
         {
-
             case 10:
                 HomeworkTen();
                 break;
