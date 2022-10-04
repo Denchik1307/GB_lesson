@@ -69,7 +69,6 @@ void HomeworkThirteen()
         else
         {
             Console.WriteLine(someNumber[2].ToString());
-
         }
     }
     catch
