@@ -6,7 +6,7 @@ void Select_exisize()
 {
     try
     {
-        Console.Write("Введите номер задачи (10, 13 или 15): ");
+        Print("Введите номер задачи (10, 13 или 15): ");
         int number_exisize = int.Parse(Console.ReadLine()!);
 
         switch (number_exisize)
@@ -37,7 +37,7 @@ void HomeworkTen()
 {
     try
     {
-        Console.Write("Введите трёхзначное число: ");
+        Print("Введите трёхзначное число: ");
         string number = Console.ReadLine()!;
         if (number.Length != 3)
         {
@@ -46,7 +46,7 @@ void HomeworkTen()
         }
         else
         {
-            Console.WriteLine(number[1].ToString());
+            Println(number[1].ToString());
         }
     }
     catch
@@ -60,15 +60,15 @@ void HomeworkThirteen()
 {
     try
     {
-        Console.Write("Введите число: ");
+        Print("Введите число: ");
         string someNumber = Console.ReadLine()!;
         if (someNumber.Length < 3)
         {
-            Console.WriteLine("Здесь нет третьей цифры!");
+            Println("Здесь нет третьей цифры!");
         }
         else
         {
-            Console.WriteLine(someNumber[2].ToString());
+            Println(someNumber[2].ToString());
         }
     }
     catch
@@ -85,17 +85,17 @@ void HomeworkFourteen()
 
     try
     {
-        Console.Write("Введите порядковый номер дня недели: ");
+        Print("Введите порядковый номер дня недели: ");
         int numberDayWeak = int.Parse(Console.ReadLine()!);
         if (numberDayWeak >= startWeak && numberDayWeak <= endWeak)
         {
             if (numberDayWeak == 6 ^ numberDayWeak == 7)
             {
-                Console.WriteLine("Выходной!!!");
+                Println("Выходной!!!");
             }
             else
             {
-                Console.WriteLine("Будний :'(");
+                Println("Будний :'(");
             }
         }
         else
@@ -115,5 +115,14 @@ void HomeworkFourteen()
 void Error()
 {
     Console.Clear();
-    Console.WriteLine("Что-то не так, попробуй ещё");
+    Println("Что-то не так, попробуй ещё");
 }
+
+void Print(string msg){
+    Console.Write(msg);
+}
+
+void Println(string msg){
+    Console.WriteLine(msg);
+}
+
