@@ -39,6 +39,8 @@ void HomeworkTen()
     {
         Print("Введите трёхзначное число: ");
         string number = Console.ReadLine()!;
+        number = CheckMinus(number);
+
         if (number.Length != 3)
         {
             Error();
@@ -46,7 +48,7 @@ void HomeworkTen()
         }
         else
         {
-            Println(number[1].ToString());
+            Println($"{number[1]}");
         }
     }
     catch
@@ -62,6 +64,8 @@ void HomeworkThirteen()
     {
         Print("Введите число: ");
         string someNumber = Console.ReadLine()!;
+        someNumber = CheckMinus(someNumber);
+
         if (someNumber.Length < 3)
         {
             Println("Здесь нет третьей цифры!");
@@ -114,15 +118,25 @@ void HomeworkFourteen()
 
 void Error()
 {
-    Console.Clear();
+   // Console.Clear();
     Println("Что-то не так, попробуй ещё");
 }
 
-void Print(string msg){
+void Print(string msg)
+{
     Console.Write(msg);
 }
 
-void Println(string msg){
+void Println(string msg)
+{
     Console.WriteLine(msg);
 }
 
+string CheckMinus(string value)
+{
+    if (value[0] == '-')
+    {
+        value = value.Trim('-');
+    }
+    return value;
+}
