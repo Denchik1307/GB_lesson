@@ -118,7 +118,7 @@ void HomeworkFourteen()
 
 void Error()
 {
-   // Console.Clear();
+    Console.Clear();
     Println("Что-то не так, попробуй ещё");
 }
 
