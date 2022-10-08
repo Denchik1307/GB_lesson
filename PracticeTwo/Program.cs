@@ -45,10 +45,8 @@ void TwentyOne()
 {
     try
     {
-        double[] pointX = new double[3];
-        double[] pointY = new double[3];
-        pointX = GetPointHowArray("первой точки");
-        pointY = GetPointHowArray("второй точки");
+        double[] pointX = GetPointHowArray("первой точки");
+        double[] pointY = GetPointHowArray("второй точки");
 
         PrintCalcLength3DLine(pointX, pointY);
     }
