@@ -32,7 +32,7 @@ void ExisizeNineteenth()
 {
     try
     {
-        Print((IsPalindrome(GetInputString("Введите палиндром на проверку: "))) ? "Да эт он" : "Нет не подходит");
+        Print((IsPalindrome(GetInputString("Введите палиндром на проверку (ВНИМАНИЕ ПРОБЕЛЫ УДАЛЯЮТСЯ АВТОМАТИЧЕСКИ): "))) ? "Да эт он" : "Нет не подходит");
     }
     catch
     {
@@ -102,7 +102,9 @@ void Println(string msg)
 bool IsPalindrome(string value)
 {
     value = value.Trim('-');
+    value = value.Replace(" ","");
     string temp = "";
+    Print(value);
     for (int i = value.Length - 1; i >= 0; i--)
     {
         temp += value[i];
