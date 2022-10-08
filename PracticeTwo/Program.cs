@@ -1,4 +1,4 @@
-﻿Console.Clear();
+Console.Clear();
 ExisizeNumber();
 
 void ExisizeNumber()
