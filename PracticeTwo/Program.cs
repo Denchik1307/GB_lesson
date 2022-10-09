@@ -141,11 +141,10 @@ void CubeNumbersPrint(int number)
 {
     string tmp = "";
     int count = 1;
-    while (count < number)
+    while (count <= number)
     {
-        tmp += Convert.ToString(Math.Pow(count, 3)) + ", ";
+        tmp += Convert.ToString(Math.Pow(count, 3)) + (count < number ? ", " : ".");
         count++;
     }
-    tmp += Convert.ToString(Math.Pow(count, 3)) + ". ";
     Print(tmp);
 }
