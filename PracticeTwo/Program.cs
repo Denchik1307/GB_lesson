@@ -101,8 +101,16 @@ void Println(string msg)
 
 bool IsPalindrome(string value)
 {
-    value = value.Trim('-');
+    // value = value.Trim('-');
     value = value.Replace(" ","");
+    value = value.Replace("-","");
+    value = value.Replace("-","");
+    value = value.Replace(",","");
+    value = value.Replace(".","");
+    value = value.Replace(":","");
+    value = value.Replace(";","");
+    value = value.Replace("\"","");
+    value = value.Replace("\'","");
     string temp = "";
     Print(value);
     for (int i = value.Length - 1; i >= 0; i--)
