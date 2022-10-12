@@ -55,7 +55,7 @@ void ExempleTwentySeven()
     try
     {
         long someNumber = GetInputLong("Введите положительное чило: ");
-        int result = SummDigitNumber(someNumber);
+        long result = SummDigitNumber(someNumber);
         Println($"Сумма чисел числа {someNumber} = {result.ToString()}");
     }
     catch
@@ -72,7 +72,7 @@ void ExempleTwentyNine()
         int arrayLength = GetInputInt("\nВведите длинну массива: ");
         int minValue = GetInputInt("\nВведите минимальное значение числа в массиве: ");
         int maxValue = GetInputInt("\nВведите максимальное значение числа в массиве: ");
-        Println(ArrayToString(RandomArray(arrayLength, minValue, maxValue)));
+        Println($"\n{ArrayToString(RandomArray(arrayLength, minValue, maxValue))}\n");
     }
     catch
     {
@@ -81,7 +81,7 @@ void ExempleTwentyNine()
     }
 }
 
-int SummDigitNumber(long number)
+long SummDigitNumber(long number)
 {
     long summ = 0;
     while (number > 0)
@@ -89,7 +89,7 @@ int SummDigitNumber(long number)
         summ += number % 10;
         number /= 10;
     }
-    return ((int)summ);
+    return (summ);
 }
 
 int[] RandomArray(int lengthArray, int min, int max)
