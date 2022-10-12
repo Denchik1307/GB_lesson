@@ -150,7 +150,7 @@ double MyPow(double number, int pow, int range = 2)
     double result = 1.0d;
     for (int i = 1; i <= pow; i++)
     {
-        result = result * number;
+        result *= number;
     }
 
     return Math.Round(result, range);
