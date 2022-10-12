@@ -37,7 +37,7 @@ void ExempleTwentyFive()
     try
     {
         double number = GetInputDouble("Введите число: ");
-        int pow = GetInputInt("Введите степень для возведения числа: ");
+        int pow = GetInputPositiveInt("Введите степень для возведения числа: ");
 
         double result = MyPow(number, pow, 3);
 
@@ -127,10 +127,23 @@ void Println(string msg)
     Console.WriteLine(msg);
 }
 
-int GetInputInt(string msg = "Введите int число:")
+int GetInputPositiveInt(string msg = "Введите положительное число:")
 {
     Console.Write(msg);
-    return int.Parse(Console.ReadLine()!);
+    int value = int.Parse(Console.ReadLine()!);
+    if (value < 0)
+    {
+        value = GetInputPositiveInt();
+    }
+
+    return value;
+}
+
+int GetInputInt(string msg = "Введите положительное число:")
+{
+    Console.Write(msg);
+    int value = int.Parse(Console.ReadLine()!);
+    return value;
 }
 
 long GetInputLong(string msg = "Введите long число:")
