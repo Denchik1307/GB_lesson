@@ -1,4 +1,4 @@
-﻿bool debug = false;
+bool debug = false;
 
 if (!debug)
     Console.Clear();
@@ -37,7 +37,7 @@ void ExempleTwentyFive()
     try
     {
         double number = GetInputDouble("Введите число: ");
-        int pow = GetInputPositiveInt("Введите степень для возведения числа: ");
+        uint pow = GetInputPositiveInt("Введите степень для возведения числа: ");
 
         double result = MyPow(number, pow, 3);
 
@@ -127,13 +127,14 @@ void Println(string msg)
     Console.WriteLine(msg);
 }
 
-int GetInputPositiveInt(string msg = "Введите положительное число:")
+uint GetInputPositiveInt(string msg = "Введите положительное число:")
 {
     Console.Write(msg);
-    int value = int.Parse(Console.ReadLine()!);
-    if (value < 0)
+    uint value;
+    while (!uint.TryParse(Console.ReadLine(), out value))
     {
-        value = GetInputPositiveInt();
+        Console.WriteLine("Ошибка ввода!!");
+        Console.Write("Нужно положительное число:");
     }
 
     return value;
@@ -158,7 +159,7 @@ double GetInputDouble(string msg = "Введите double число:")
     return double.Parse(Console.ReadLine()!);
 }
 
-double MyPow(double number, int pow, int range = 2)
+double MyPow(double number, uint pow, int range = 2)
 {
     double result = 1.0d;
     for (int i = 1; i <= pow; i++)
