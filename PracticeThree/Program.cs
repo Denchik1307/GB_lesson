@@ -172,6 +172,6 @@ double MyPow(double number, int pow, int range = 2)
 void Error()
 {
     if (!debug)
-        Console.Clear();
+    Console.Clear();
     Println("Что-то не так, попробуй ещё");
 }

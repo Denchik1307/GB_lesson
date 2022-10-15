@@ -102,15 +102,15 @@ void Println(string msg)
 bool IsPalindrome(string value)
 {
     // value = value.Trim('-');
-    value = value.Replace(" ","");
-    value = value.Replace("-","");
-    value = value.Replace("-","");
-    value = value.Replace(",","");
-    value = value.Replace(".","");
-    value = value.Replace(":","");
-    value = value.Replace(";","");
-    value = value.Replace("\"","");
-    value = value.Replace("\'","");
+    value = value.Replace(" ", "");
+    value = value.Replace("-", "");
+    value = value.Replace("-", "");
+    value = value.Replace(",", "");
+    value = value.Replace(".", "");
+    value = value.Replace(":", "");
+    value = value.Replace(";", "");
+    value = value.Replace("\"", "");
+    value = value.Replace("\'", "");
     string temp = "";
     Print(value);
     for (int i = value.Length - 1; i >= 0; i--)
@@ -142,7 +142,7 @@ void PrintCalcLength3DLine(double[] x, double[] y)
     }
     Math.Sqrt(tmp);
 
-    Println("~" + Math.Round(Math.Sqrt(tmp), 3).ToString());
+    Println("~" + Math.Round(Math.Sqrt(tmp), 3));
 }
 
 void CubeNumbersPrint(int number)
@@ -156,3 +156,4 @@ void CubeNumbersPrint(int number)
     }
     Print(tmp);
 }
+
