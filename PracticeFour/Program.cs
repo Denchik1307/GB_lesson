@@ -16,7 +16,7 @@ void ExerciseNumber()
             ExampleThirtyEigth();
             break;
         default:
-            Print("Непредвиденная ошибка");
+            Print("Непредвиденная ошибка ввода");
             break;
     }
 }
@@ -32,7 +32,7 @@ void ExampleThirtySix()
 {
     int[] randArray = GetRandomArrayWithRange(4);
     Print(
-        $"\nМассив {ArrayIntToStringForPrint(randArray)} сумма элементов нечетных позиций = {(SummArrayElement(randArray, 1))}.\n"
+        $"\nМассив {ArrayIntToStringForPrint(randArray)} сумма элементов нечетных позиций = {(SummArrayElement(randArray, "event"))}.\n"
     );
 }
 
@@ -44,19 +44,19 @@ void ExampleThirtyEigth()
     Print("Собственные ф-ции\t" + Math.Round((MaxInArray(array) - MinInArray(array)), 2).ToString());
 }
 
-int SummArrayElement(int[] arr, int mask = 0)
+int SummArrayElement(int[] arr, string mask = "all")
 {
     int summ = 0;
     switch (mask)
     {
-        case 1:
+        case "event":
             for (int i = 1; i < arr.Length; )
             {
                 summ += arr[i];
                 i += 2;
             }
             break;
-        case 2:
+        case "odd":
             for (int i = 0; i < arr.Length; )
             {
                 summ += arr[i];
