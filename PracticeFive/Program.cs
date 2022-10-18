@@ -36,7 +36,7 @@ void ExampleFortyThree()
     double x =-(b2 - b1) / (-k1 + k2);
     double y = k2 * x + b2;
 
-    Console.WriteLine($"две прямые пересекутся в точке с координатами X: {Math.Round(x,2)}, Y: {Math.Round(y,2)}");
+    Console.WriteLine($"Прямые пересекутся в X: {Math.Round(x,2)}, Y: {Math.Round(y,2)}");
 }
 
 int GetInputInt(string msg)
@@ -72,7 +72,7 @@ int CountPositiveInArray(int[] inputArray)
     return count;
 }
 
-int[] GetIntArrayFromConsole(string msg = "Введите массив вещественных чисел разделяя запятой: ")
+int[] GetIntArrayFromConsole(string msg = "Введите массив целых чисел разделяя запятой: ")
 {
     Console.Write(msg);
     string[] inputArray = Console.ReadLine()!.Split(",");
