@@ -105,14 +105,3 @@ string ArrayIntForPrint(int[] inputArray)
     string tmp = "[" + string.Join(", ", stringArray) + "]";
     return tmp;
 }
-
-string ArrayDoubleToStringForPrint(double[] inputArray)
-{
-    string[] stringArray = new string[inputArray.Length];
-    for (int i = 0; i < inputArray.Length; i++)
-    {
-        stringArray[i] = inputArray[i].ToString();
-    }
-    string tmp = "[" + string.Join(", ", stringArray) + "]";
-    return tmp;
-}
