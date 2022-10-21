@@ -11,10 +11,10 @@ void ExerciseNumber()
             ExampleThirtySeven();
             break;
         case 50:
-            ExampleThirtySix();
+            ExampleFifty();
             break;
         case 52:
-            ExampleThirtyEigth();
+            ExampleThirtyTwo();
             break;
         default:
             Print("Непредвиденная ошибка ввода");
@@ -31,7 +31,7 @@ void ExampleThirtySeven()
     ShowArray(numbers);
 }
 
-void ExampleThirtySix()
+void ExampleFifty()
 {
     int columnArray = GetIntNumberFromConsole("введите количество строк: ");
     int rowArray = GetIntNumberFromConsole("введите количество столбцов: ");
@@ -45,7 +45,7 @@ void ExampleThirtySix()
     ShowCellInArray(numbers, colIndex, rowIndex);
 }
 
-void ExampleThirtyEigth()
+void ExampleThirtyTwo()
 {
     int columnArray = GetIntNumberFromConsole("введите количество строк: ");
     int rowArray = GetIntNumberFromConsole("введите количество столбцов: ");
