@@ -14,7 +14,7 @@ void ExerciseNumber()
             ExampleFifty();
             break;
         case 52:
-            ExampleThirtyTwo();
+            ExampleFiftyTwo();
             break;
         default:
             Print("Непредвиденная ошибка ввода");
@@ -45,7 +45,7 @@ void ExampleFifty()
     ShowCellInArray(numbers, colIndex, rowIndex);
 }
 
-void ExampleThirtyTwo()
+void ExampleFiftyTwo()
 {
     int columnArray = GetIntNumberFromConsole("введите количество строк: ");
     int rowArray = GetIntNumberFromConsole("введите количество столбцов: ");
