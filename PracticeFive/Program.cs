@@ -13,7 +13,7 @@ void ExerciseNumber()
             ExampleFortyThree();
             break;
         default:
-            Print("Непредвиденная ошибка ввода");
+            Print("ошибка ввода");
             break;
     }
 }
@@ -33,17 +33,17 @@ void ExampleFortyThree()
     double b2 = GetInputInt("введите число b2: ");
     double k2 = GetInputInt("введите число k2: ");
 
-    double x =-(b2 - b1) / (-k1 + k2);
+    double x = -(b2 - b1) / (-k1 + k2);
     double y = k2 * x + b2;
 
-    Console.WriteLine($"Прямые пересекутся в X: {Math.Round(x,2)}, Y: {Math.Round(y,2)}");
+    Console.WriteLine($"Прямые пересекутся в X: {Math.Round(x, 2)}, Y: {Math.Round(y, 2)}");
 }
 
 int GetInputInt(string msg)
 {
     Console.Write(msg);
     int value;
-    while (!int.TryParse(Console.ReadLine(),out value))
+    while (!int.TryParse(Console.ReadLine(), out value))
     {
         Console.WriteLine("Ошибка ввода!!");
     }
@@ -79,7 +79,7 @@ int[] GetIntArrayFromConsole(string msg = "Введите массив целы�
     int[] intArray = new int[inputArray.Length];
     for (int i = 0; i < inputArray.Length; i++)
     {
-        intArray[i] = (int.TryParse(inputArray[i], out int value)? value : -1);
+        intArray[i] = (int.TryParse(inputArray[i], out int value) ? value : -1);
     }
 
     return intArray;

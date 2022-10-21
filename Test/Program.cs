@@ -1,46 +1,47 @@
-﻿Console.Clear();
-int[] array = GetArrayFromConsole();
-int lastNumber = 0;
-int[] arraySummPair;
+﻿using System;
 
-if (array.Length % 2 != 0)
+public class MainClass2
 {
-    lastNumber = array[array.Length / 2 + 1];
-    arraySummPair = new int[array.Length/2 + 1];
-    arraySummPair[array.Length/2] = array[array.Length/2];
-}
-else
-{
-    arraySummPair = new int[array.Length/2];
-}
-
-for (int i = 0; i < array.Length/2; i++)
-{
-    arraySummPair[i] = array[i] * array[(array.Length-1-i)];
-}
-
-Console.WriteLine(ArrayIntToStringForPrint(arraySummPair));
-
-string ArrayIntToStringForPrint(int[] inputArray)
-{
-    string[] stringArray = new string[inputArray.Length];
-    for (int i = 0; i < inputArray.Length; i++)
+    public static void Main2()
     {
-        stringArray[i] = inputArray[i].ToString();
-    }
-    string tmp = $"[{string.Join(", ", stringArray)}]";
-    return tmp;
-}
+        Console.Clear();
+        int firstNumber = int.Parse(Console.ReadLine()!);
+        // Console.WriteLine($"1 {firstNumber} ");
+        int secondNumber = int.Parse(Console.ReadLine()!);
+        // Console.WriteLine($"2 {secondNumber} ");
+        string tmp = "";
+        int check;
+        int print;
+        // Ваш код
+        for (int i = secondNumber.ToString().Length - 2; i >= 0; i--)
+        {
+            check = secondNumber % 10;
+            // Console.WriteLine($"3 {check} ");
+            tmp += check.ToString();
+            // Console.WriteLine($"4 {tmp} ");
+            // Console.WriteLine($"4 {check.ToString()} ");
+            Console.WriteLine($"4-1 {((tmp.Contains(check.ToString())) ? "true" : "false")} ");
+            bool hhh = tmp.Contains(check.ToString());
+            if (hhh)
+            {
 
-int[] GetArrayFromConsole(string msg = "Введите массив чисел разделяя пробелом: ")
-{
-    Console.Write(msg);
-    string[] inputArray = Console.ReadLine()!.Split(" ");
-    int[] intArray = new int[inputArray.Length];
-    for (int i = 0; i < inputArray.Length; i++)
-    {
-        intArray[i] = int.Parse(inputArray[i]);
+            }
+            else
+            {
+                for (int j = firstNumber.ToString().Length - 2; j >= 0; j--)
+                {
+                    print = firstNumber % 10;
+                    // Console.WriteLine($"5 {print} ");
+                    if (check == print)
+                    {
+                        Console.WriteLine($"6 {print} ");
+                    }
+                    firstNumber = firstNumber / 10;
+                    // Console.WriteLine($"7 {firstNumber} ");
+                }
+            }
+            secondNumber = secondNumber / 10;
+            // Console.WriteLine($"8 {secondNumber} ");
+        }
     }
-
-    return intArray;
 }
