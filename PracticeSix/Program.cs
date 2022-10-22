@@ -156,11 +156,11 @@ void ShowArray(double[,] array)
 
 void ShowIntArray(int[,] array)
 {
-    for (int col = 0; col < array.GetLength(0); col++)
+    for (int row = 0; row < array.GetLength(0); row++)
     {
-        for (int row = 0; row < array.GetLength(1); row++)
+        for (int col = 0; col < array.GetLength(1); col++)
         {
-            Console.Write($"{array[col, row]}\t");
+            Console.Write($"{array[row, col]}\t");
         }
         Console.WriteLine();
     }
