@@ -33,26 +33,26 @@ void ExampleThirtySeven()
 
 void ExampleFifty()
 {
-    int columnArray = GetIntNumberFromConsole("введите количество строк: ");
-    int rowArray = GetIntNumberFromConsole("введите количество столбцов: ");
-    int colIndex = GetIntNumberFromConsole("введите номер строки: ");
-    int rowIndex = GetIntNumberFromConsole("введите номер столбца: ");
+    int rowArray = GetIntNumberFromConsole("введите количество строк: ");
+    int columnArray = GetIntNumberFromConsole("введите количество столбцов: ");
+    int rowIndex = GetIntNumberFromConsole("введите номер строки: ");
+    int colIndex = GetIntNumberFromConsole("введите номер столбца: ");
 
-    int[,] numbers = new int[columnArray, rowArray];
+    int[,] numbers = new int[rowArray, columnArray];
 
     FillArrayRandomIntNumbers(numbers);
 
-    ShowCellInArray(numbers, colIndex, rowIndex);
+    ShowCellInArray(numbers, rowIndex, colIndex);
 }
 
 void ExampleFiftyTwo()
 {
-    int columnArray = GetIntNumberFromConsole("введите количество строк: ");
-    int rowArray = GetIntNumberFromConsole("введите количество столбцов: ");
+    int rowArray = GetIntNumberFromConsole("введите количество строк: ");
+    int columnArray = GetIntNumberFromConsole("введите количество столбцов: ");
 
-    int[,] numbers = new int[columnArray, rowArray];
+    int[,] numbers = new int[rowArray, columnArray];
 
-    FillArrayRandomIntNumbers(numbers, 0 , 100);
+    FillArrayRandomIntNumbers(numbers, 0, 100);
     ShowIntArray(numbers);
     Println("Среднее по столбцам");
 
@@ -65,26 +65,26 @@ void ShowMidleSummRowInArray(int[,] array)
     int row;
     int col;
     double tmp = 0;
-    for (col = 0; col < array.GetLength(0); col++)
+    for (row = 0; row < array.GetLength(0); row++)
     {
-        for (row = 0; row < array.GetLength(1); row++)
+        for (col = 0; col < array.GetLength(1); col++)
         {
-            tmp += array[col, row];
+            tmp += array[row, col];
         }
-        tmp /= (double)row;
+        tmp /= (double)col;
 
         results += Math.Round(tmp, 2).ToString() + "\t";
     }
     Print(results);
 }
 
-void ShowCellInArray(int[,] array, int colIndex, int rowIndex)
+void ShowCellInArray(int[,] array, int rowIndex, int colIndex)
 {
     ShowIntArray(array);
     Println();
-    if (colIndex < array.GetLength(0) && rowIndex < array.GetLength(1))
+    if (rowIndex < array.GetLength(0) && colIndex < array.GetLength(1))
     {
-        Print($"содержимое вашей ячейки[{colIndex},{rowIndex}]: {array[colIndex, rowIndex]}");
+        Print($"содержимое вашей ячейки[{rowIndex},{colIndex}]: {array[rowIndex, colIndex]}");
     }
     else
     {
