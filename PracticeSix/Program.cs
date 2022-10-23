@@ -52,7 +52,7 @@ void ExampleFiftyTwo()
 
     int[,] numbers = new int[rowArray, columnArray];
 
-    FillArrayRandomIntNumbers(numbers, 0, 100);
+    FillArrayRandomIntNumbers(numbers, 0, 10);
     ShowIntArray(numbers);
     Println("Среднее по столбцам");
 
@@ -64,15 +64,14 @@ void ShowMidleSummRowInArray(int[,] array)
     string results = String.Empty;
     int row;
     int col;
-    double tmp = 0;
-    for (row = 0; row < array.GetLength(0); row++)
+    for (row = 0; row < array.GetLength(1); row++)
     {
-        for (col = 0; col < array.GetLength(1); col++)
+        double tmp = 0;
+        for (col = 0; col < array.GetLength(0); col++)
         {
-            tmp += array[row, col];
+            tmp += array[col, row];
         }
         tmp /= (double)col;
-
         results += Math.Round(tmp, 2).ToString() + "\t";
     }
     Print(results);
