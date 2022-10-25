@@ -66,14 +66,14 @@ void ShowMidleSummRowInArray(int[,] array)
     string results = String.Empty;
     int row;
     int col;
-    for (row = 0; row < array.GetLength(1); row++)
+    for (col = 0; col < array.GetLength(1); col++)
     {
         double tmp = 0;
-        for (col = 0; col < array.GetLength(0); col++)
+        for (row = 0; row < array.GetLength(0); row++)
         {
-            tmp += array[col, row];
+            tmp += array[row, col];
         }
-        tmp /= (double)col;
+        tmp /= (double)row;
         results += Math.Round(tmp, 2).ToString() + "\t";
     }
     Print(results);
