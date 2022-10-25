@@ -27,8 +27,8 @@ void ExampleThirtySeven()
     int linesVol = GetIntNumberFromConsole("введите количество строк: ");
     int columnsVol = GetIntNumberFromConsole("введите количество столбцов: ");
     double[,] numbers = new double[linesVol, columnsVol];
-    FillArrayRandomDoubleNumbers(numbers);
-    ShowArray(numbers);
+    FillArrayRandomDoubleNumbers(numbers, range: 2);
+    ShowDoubleArray(numbers);
 }
 
 void ExampleFifty()
@@ -53,7 +53,9 @@ void ExampleFiftyTwo()
     int[,] numbers = new int[rowArray, columnArray];
 
     FillArrayRandomIntNumbers(numbers, 0, 10);
+
     ShowIntArray(numbers);
+
     Println("Среднее по столбцам");
 
     ShowMidleSummRowInArray(numbers);
@@ -109,13 +111,18 @@ int GetIntNumberFromConsole(string message)
     return int.Parse(Console.ReadLine()!);
 }
 
-void FillArrayRandomDoubleNumbers(double[,] array, int min = -100, int max = 100)
+void FillArrayRandomDoubleNumbers(double[,] array, int min = -100, int max = 100, int range = 4)
 {
+    int tmpRange = 1;
+    for (int i = 0; i < range; i++)
+    {
+        tmpRange = tmpRange * 10;
+    }
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            array[i, j] = Convert.ToDouble(new Random().Next(min * 100, max * 100)) / 100;
+            array[i, j] = Convert.ToDouble(new Random().Next(min * tmpRange, max * tmpRange)) / tmpRange;
         }
     }
 }
@@ -141,13 +148,13 @@ void Println(string msg = "")
     Console.WriteLine(msg);
 }
 
-void ShowArray(double[,] array)
+void ShowDoubleArray(double[,] array)
 {
-    for (int col = 0; col < array.GetLength(0); col++)
+    for (int row = 0; row < array.GetLength(0); row++)
     {
-        for (int row = 0; row < array.GetLength(1); row++)
+        for (int col = 0; col < array.GetLength(1); col++)
         {
-            Console.Write($"{array[col, row]}\t");
+            Console.Write($"{array[row, col]}\t");
         }
         Console.WriteLine();
     }

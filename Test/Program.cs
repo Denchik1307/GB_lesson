@@ -2,7 +2,11 @@
 using System.Diagnostics;
 using System.Collections;
 
-// int height = int.Parse(Console.ReadLine()!) + 1;
+
+
+
+int m = SingleLinkedList.Math(12);
+// int height = int.Parse(Console.ReadLine()!);
 
 // for (int i = 0; i <= height; i++)
 // {
@@ -28,7 +32,7 @@ foreach (int num in arrayA)
 timer.Start();
 LinkedList<int> revList = LinkedListRevert(list);
 timer.Stop();
-Console.WriteLine(timer.Elapsed.ToString());
+Console.WriteLine(timer.Elapsed);
 
 // ShowArray(list);
 Console.WriteLine();
