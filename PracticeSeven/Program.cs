@@ -30,22 +30,18 @@ void ExerciseNumber()
 
 void ExampleFiftyFour()
 {
-    /* Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
-        Например, задан массив:
-        1 4 7 2
-        5 9 2 3
-        8 4 2 4
-        В итоге получается вот такой массив:
-        7 4 2 1
-        9 5 3 2
-        8 4 4 2 */
+    /* Задача 54: Задайте двумерный массив. Напишите программу, 
+    которая упорядочит по убыванию 
+    элементы каждой строки двумерного массива.*/
+    const int MIN_RANDOM = 0;
+    const int MAX_RANDOM = 50;
 
     int linesVol = GetPositiveInt("введите количество строк: ");
     int columnsVol = GetPositiveInt("введите количество столбцов: ");
 
     int[,] number = new int[linesVol, columnsVol];
 
-    FillArrayRandomNumbers(number, 0, 10);
+    FillArrayRandomNumbers(number, MIN_RANDOM, MAX_RANDOM);
 
     Console.WriteLine("Массив до:");
 
@@ -62,11 +58,13 @@ void ExampleFiftySix()
     /* Задача 56: Задайте прямоугольный двумерный массив. 
     Напишите программу, которая будет находить 
     строку с наименьшей суммой элементов.*/
+    const int MIN_RANDOM = 0;
+    const int MAX_RANDOM = 50;
 
     int sizeArray = GetPositiveInt("введите размер квадратного массива: ");
     int[,] sqareArray = new int[sizeArray, sizeArray];
 
-    FillArrayRandomNumbers(sqareArray, 0, 50);
+    FillArrayRandomNumbers(sqareArray, MIN_RANDOM, MAX_RANDOM);
 
     ShowArray<int>.ShowDualLayerArrayWithIndex(sqareArray);
 
@@ -94,14 +92,17 @@ void ExampleFiftyEigth()
     Напишите программу, которая будет находить 
     произведение двух матриц.*/
 
+    const int MIN_RANDOM = 0;
+    const int MAX_RANDOM = 10;
+
     int sizeOne = GetPositiveInt("Введите размер №1 матриц: ");
     int sizeTwo = GetPositiveInt("Введите размер №2 матриц: ");
 
     int[,] matrixOne = new int[sizeOne, sizeTwo];
     int[,] matrixTwo = new int[sizeTwo, sizeOne];
 
-    FillArrayRandomNumbers(matrixOne, 0, 3);
-    FillArrayRandomNumbers(matrixTwo, 0, 3);
+    FillArrayRandomNumbers(matrixOne, MIN_RANDOM, MAX_RANDOM);
+    FillArrayRandomNumbers(matrixTwo, MIN_RANDOM, MAX_RANDOM);
 
     long[,] matrixResult = MatrixSumm(matrixOne, matrixTwo);
     long[,] matrixResultTwo = MatrixSumm(matrixTwo, matrixOne);
@@ -124,6 +125,7 @@ void ExampleSixty()
     /* Задача 60: Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
     Напишите программу, которая будет построчно выводить массив, 
     добавляя индексы каждого элемента.*/
+    const int SPACE_FOR_PRINT_ARRAY = 5;
 
     int sideOne = GetPositiveInt("Введите размерность 1: ");
     int sideTwo = GetPositiveInt("Введите размерность 2: ");
@@ -137,7 +139,7 @@ void ExampleSixty()
         {
             for (int y = 0; y < resultArray.GetLength(1); y++)
             {
-                Console.Write($"{resultArray[x, y, z],6} ({x},{y},{z})");
+                Console.Write($"{resultArray[x, y, z],SPACE_FOR_PRINT_ARRAY} ({x},{y},{z})");
             }
             Console.WriteLine();
         }
@@ -270,14 +272,16 @@ void FillArrayRandomNumbers(int[,] array, int min = -100, int max = 100)
     }
 }
 
-int[,,] Create3DMassive(int size1, int size2, int size3)
+int[,,] Create3DMassive(int size1, int size2, int size3, int minRandom = 0, int maxRandom = 20)
 {
-    int maxRandom = 20;
-    int minRandom = 10;
     Random rand = new Random();
+
     int[,,] array = new int[size1, size2, size3];
-    int tmp = rand.Next(minRandom, maxRandom); ;
+
+    int tmp = rand.Next(minRandom, maxRandom);
+
     List<int> listNum = new List<int>();
+
     for (int i = 0; i < size1; i++)
     {
         for (int j = 0; j < size2; j++)
@@ -302,15 +306,16 @@ int[,,] Create3DMassive(int size1, int size2, int size3)
 
 class ShowArray<T>
 {
-    public static void ShowDualLayerArrayWithIndex(T[,] inputArray, string text = "", bool IsIndex = false)
+    public static void ShowDualLayerArrayWithIndex(T[,] inputArray, string text = "", bool IsWithIndex = false)
     {
+        const int SPACE_FOR_PRINT_ARRAY = 4;
         Console.WriteLine(text);
         for (int row = 0; row < inputArray.GetLength(0); row++)
         {
             for (int col = 0; col < inputArray.GetLength(1); col++)
             {
-                Console.Write($"{inputArray[row, col],4}");
-                if (IsIndex)
+                Console.Write($"{inputArray[row, col],SPACE_FOR_PRINT_ARRAY}");
+                if (IsWithIndex)
                 {
                     Console.Write($"{row},{col}");
                 }
