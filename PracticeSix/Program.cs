@@ -24,8 +24,8 @@ void ExerciseNumber()
 
 void ExampleThirtySeven()
 {
-    int linesVol = GetIntNumberFromConsole("введите количество строк: ");
-    int columnsVol = GetIntNumberFromConsole("введите количество столбцов: ");
+    int linesVol = GetPositiveIntNumberFromConsole("введите количество строк: ");
+    int columnsVol = GetPositiveIntNumberFromConsole("введите количество столбцов: ");
     double[,] numbers = new double[linesVol, columnsVol];
     FillArrayRandomDoubleNumbers(numbers, range: 2);
     ShowDoubleArray(numbers);
@@ -33,10 +33,10 @@ void ExampleThirtySeven()
 
 void ExampleFifty()
 {
-    int rowArray = GetIntNumberFromConsole("введите количество строк: ");
-    int columnArray = GetIntNumberFromConsole("введите количество столбцов: ");
-    int rowIndex = GetIntNumberFromConsole("введите номер строки: ");
-    int colIndex = GetIntNumberFromConsole("введите номер столбца: ");
+    int rowArray = GetPositiveIntNumberFromConsole("введите количество строк: ");
+    int columnArray = GetPositiveIntNumberFromConsole("введите количество столбцов: ");
+    int rowIndex = GetPositiveIntNumberFromConsole("введите номер строки: ");
+    int colIndex = GetPositiveIntNumberFromConsole("введите номер столбца: ");
 
     int[,] numbers = new int[rowArray, columnArray];
 
@@ -47,8 +47,8 @@ void ExampleFifty()
 
 void ExampleFiftyTwo()
 {
-    int rowArray = GetIntNumberFromConsole("введите количество строк: ");
-    int columnArray = GetIntNumberFromConsole("введите количество столбцов: ");
+    int rowArray = GetPositiveIntNumberFromConsole("введите количество строк: ");
+    int columnArray = GetPositiveIntNumberFromConsole("введите количество столбцов: ");
 
     int[,] numbers = new int[rowArray, columnArray];
 
@@ -105,10 +105,15 @@ uint GetNumberExercise(int first, int second, int third)
     return value;
 }
 
-int GetIntNumberFromConsole(string message)
+int GetPositiveIntNumberFromConsole(string message)
 {
     Console.Write(message);
-    return int.Parse(Console.ReadLine()!);
+    int value;
+    while(!int.TryParse(Console.ReadLine(), out value) && value > 0)
+    {
+        Console.Write("Только положительное число: ");
+    }
+    return value;
 }
 
 void FillArrayRandomDoubleNumbers(double[,] array, int min = -100, int max = 100, int range = 4)
@@ -152,11 +157,12 @@ void ShowDoubleArray(double[,] array)
 {
     for (int row = 0; row < array.GetLength(0); row++)
     {
+        Console.Write("[");
         for (int col = 0; col < array.GetLength(1); col++)
         {
-            Console.Write($"{array[row, col]}\t");
+            Console.Write($"{array[row, col]},\t");
         }
-        Console.WriteLine();
+        Console.WriteLine("]");
     }
 }
 

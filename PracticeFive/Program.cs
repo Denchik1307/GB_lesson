@@ -13,7 +13,7 @@ void ExerciseNumber()
             ExampleFortyThree();
             break;
         default:
-            Print("ошибка ввода");
+            Print("ошибка");
             break;
     }
 }
@@ -105,3 +105,5 @@ string ArrayIntForPrint(int[] inputArray)
     string tmp = "[" + string.Join(", ", stringArray) + "]";
     return tmp;
 }
+
+
