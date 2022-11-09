@@ -162,14 +162,10 @@ void ExampleSixtyTwo()
     while (numberForSpiralArray <= sizeArrayX * sizeArrayX)
     {
         spiralArray[x, y] = numberForSpiralArray;
-        if (x <= y + 1 && x + y < sizeArrayX - 1)
-            y++;
-        else if (x < y && x + y >= sizeArrayX - 1)
-            x++;
-        else if (x >= y && x + y > sizeArrayX - 1)
-            y--;
-        else
-            x--;
+        if (x <= y + 1 && x + y < sizeArrayX - 1) y++;
+        else if (x < y && x + y >= sizeArrayX - 1) x++;
+        else if (x >= y && x + y > sizeArrayX - 1) y--;
+        else x--;
         ++numberForSpiralArray;
     }
 
