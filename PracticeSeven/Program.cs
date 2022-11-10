@@ -25,8 +25,9 @@ void ExerciseNumber()
             Console.WriteLine("Непредвиденная ошибка ввода");
             break;
     }
-}
 
+    EndProgramm();
+}
 
 void ExampleFiftyFour()
 {
@@ -45,12 +46,12 @@ void ExampleFiftyFour()
 
     Console.WriteLine("Массив до:");
 
-    ShowArray<int>.ShowDualLayerArrayWithIndex(number);
+    OutputManager<int>.ShowDualLayerArrayWithIndex(number);
 
     SortRowDualLayerArray(number, IsLowToHigh: false);
 
     Console.WriteLine("\nМассив с упорядоченными значениями");
-    ShowArray<int>.ShowDualLayerArrayWithIndex(number);
+    OutputManager<int>.ShowDualLayerArrayWithIndex(number);
 }
 
 void ExampleFiftySix()
@@ -66,7 +67,7 @@ void ExampleFiftySix()
 
     FillArrayRandomNumbers(sqareArray, MIN_RANDOM, MAX_RANDOM);
 
-    ShowArray<int>.ShowDualLayerArrayWithIndex(sqareArray);
+    OutputManager<int>.ShowDualLayerArrayWithIndex(sqareArray);
 
     int minSum = int.MaxValue;
     int rowIndex = 0;
@@ -104,20 +105,20 @@ void ExampleFiftyEigth()
     FillArrayRandomNumbers(matrixOne, MIN_RANDOM, MAX_RANDOM);
     FillArrayRandomNumbers(matrixTwo, MIN_RANDOM, MAX_RANDOM);
 
-    long[,] matrixResult = MatrixSumm(matrixOne, matrixTwo);
-    long[,] matrixResultTwo = MatrixSumm(matrixTwo, matrixOne);
+    long[,] matrixResult = GetMatrixMultiplication(matrixOne, matrixTwo);
+    long[,] matrixResultTwo = GetMatrixMultiplication(matrixTwo, matrixOne);
 
 
-    ShowArray<int>.ShowDualLayerArrayWithIndex(matrixOne, "матрица №1\n");
-
-    Console.WriteLine();
-    ShowArray<int>.ShowDualLayerArrayWithIndex(matrixTwo, "матрица №2\n");
+    OutputManager<int>.ShowDualLayerArrayWithIndex(matrixOne, "матрица №1\n");
 
     Console.WriteLine();
-    ShowArray<long>.ShowDualLayerArrayWithIndex(matrixResult, "результат A х B\n");
+    OutputManager<int>.ShowDualLayerArrayWithIndex(matrixTwo, "матрица №2\n");
 
     Console.WriteLine();
-    ShowArray<long>.ShowDualLayerArrayWithIndex(matrixResultTwo, "результат B х A\n");
+    OutputManager<long>.ShowDualLayerArrayWithIndex(matrixResult, "результат A х B\n");
+
+    Console.WriteLine();
+    OutputManager<long>.ShowDualLayerArrayWithIndex(matrixResultTwo, "результат B х A\n");
 }
 
 void ExampleSixty()
@@ -125,26 +126,14 @@ void ExampleSixty()
     /* Задача 60: Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
     Напишите программу, которая будет построчно выводить массив, 
     добавляя индексы каждого элемента.*/
-    const int SPACE_FOR_PRINT_ARRAY = 5;
 
     int sideOne = GetPositiveInt("Введите размерность 1: ");
     int sideTwo = GetPositiveInt("Введите размерность 2: ");
     int sideThree = GetPositiveInt("Введите размерность 3: ");
 
-    int[,,] resultArray = Create3DMassive(sideOne, sideTwo, sideThree);
+    int[,,] array3D = Create3DMassive(sideOne, sideTwo, sideThree);
 
-    for (int z = 0; z < resultArray.GetLength(2); z++)
-    {
-        for (int x = 0; x < resultArray.GetLength(0); x++)
-        {
-            for (int y = 0; y < resultArray.GetLength(1); y++)
-            {
-                Console.Write($"{resultArray[x, y, z],SPACE_FOR_PRINT_ARRAY} ({x},{y},{z})");
-            }
-            Console.WriteLine();
-        }
-
-    }
+    OutputManager<int>.ShowThrityLayerArrayWithIndex(array3D, "3D массив ", true);
 }
 
 void ExampleSixtyTwo()
@@ -169,7 +158,7 @@ void ExampleSixtyTwo()
         ++numberForSpiralArray;
     }
 
-    ShowArray<int>.ShowDualLayerArrayWithIndex(spiralArray, "Спираль ");
+    OutputManager<int>.ShowDualLayerArrayWithIndex(spiralArray, "Спираль ");
 }
 
 
@@ -179,14 +168,15 @@ uint GetNumberExercise(int first, int second, int third, int four, int five)
     Console.Write(text);
     uint value;
     while (!uint.TryParse(Console.ReadLine(), out value)
-            ^ value != first
-            ^ value != second
-            ^ value != third
-            ^ value != four
-            ^ value != five
+            ^ value > 0
+            && value != first
+            && value != second
+            && value != third
+            && value != four
+            && value != five
             )
     {
-        Console.WriteLine($"Ошибка ввода!!\n{text}");
+        Console.Write($"Ошибка ввода!!\n{text}");
     }
     Console.Clear();
     return value;
@@ -224,7 +214,12 @@ void SortRowDualLayerArray(int[,] inputArray, bool IsLowToHigh = true)
     }
 }
 
-long[,] MatrixSumm(int[,] arrayA, int[,] arrayB)
+// void SortRow(int[] array, bool IsLowToHigh = true)
+// {
+//     // TODO: 
+// }
+
+long[,] GetMatrixMultiplication(int[,] arrayA, int[,] arrayB)
 {
     int size = arrayA.GetLength(0);
     long[,] result = new long[size, size];
@@ -268,7 +263,7 @@ void FillArrayRandomNumbers(int[,] array, int min = -100, int max = 100)
     }
 }
 
-int[,,] Create3DMassive(int size1, int size2, int size3, int minRandom = 0, int maxRandom = 20)
+int[,,] Create3DMassive(int size1, int size2, int size3, int minRandom = 0, int maxRandom = 100)
 {
     Random rand = new Random();
 
@@ -276,7 +271,7 @@ int[,,] Create3DMassive(int size1, int size2, int size3, int minRandom = 0, int 
 
     int tmp = rand.Next(minRandom, maxRandom);
 
-    List<int> listNum = new List<int>();
+    HashSet<int> listNum = new HashSet<int>();
 
     for (int i = 0; i < size1; i++)
     {
@@ -291,35 +286,61 @@ int[,,] Create3DMassive(int size1, int size2, int size3, int minRandom = 0, int 
                 listNum.Add(tmp);
                 array[i, j, k] = tmp;
             }
-
         }
-
     }
 
     return array;
 }
 
-
-class ShowArray<T>
+void EndProgramm()
 {
+    Console.Write("\n" + "Press any key...");
+    Console.CursorVisible = false;
+    Console.ReadKey();
+    Console.Clear();
+    Console.CursorVisible = true;
+}
+
+
+class OutputManager<T>
+{
+    const int SPACE_FOR_PRINT = 5;
+
     public static void ShowDualLayerArrayWithIndex(T[,] inputArray, string text = "", bool IsWithIndex = false)
     {
-        const int SPACE_FOR_PRINT_ARRAY = 4;
         Console.WriteLine(text);
         for (int row = 0; row < inputArray.GetLength(0); row++)
         {
             for (int col = 0; col < inputArray.GetLength(1); col++)
             {
-                Console.Write($"{inputArray[row, col],SPACE_FOR_PRINT_ARRAY}");
+                Console.Write($"{inputArray[row, col],SPACE_FOR_PRINT}");
                 if (IsWithIndex)
                 {
-                    Console.Write($"{row},{col}");
+                    Console.Write($" ({row},{col}) ");
                 }
             }
             Console.WriteLine();
         }
     }
+
+    public static void ShowThrityLayerArrayWithIndex(T[,,] inputArray, string text = "", bool IsWithIndex = false)
+    {
+        Console.WriteLine(text);
+        for (int z = 0; z < inputArray.GetLength(2); z++)
+        {
+            for (int x = 0; x < inputArray.GetLength(0); x++)
+            {
+                for (int y = 0; y < inputArray.GetLength(1); y++)
+                {
+                    Console.Write($"{inputArray[x, y, z],SPACE_FOR_PRINT} ");
+                    if (IsWithIndex)
+                    {
+                        Console.Write($" ({x},{y},{z}) ");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+
 }
-
-
-
