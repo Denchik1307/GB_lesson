@@ -46,12 +46,12 @@ void ExampleFiftyFour()
 
     Console.WriteLine("Массив до:");
 
-    OutputManager<int>.ShowDualLayerArrayWithIndex(number);
+    OutputManager.ShowDualLayerArray(number);
 
     SortRowDualLayerArray(number, IsLowToHigh: false);
 
     Console.WriteLine("\nМассив с упорядоченными значениями");
-    OutputManager<int>.ShowDualLayerArrayWithIndex(number);
+    OutputManager.ShowDualLayerArray(number);
 }
 
 void ExampleFiftySix()
@@ -67,7 +67,7 @@ void ExampleFiftySix()
 
     FillArrayRandomNumbers(sqareArray, MIN_RANDOM, MAX_RANDOM);
 
-    OutputManager<int>.ShowDualLayerArrayWithIndex(sqareArray);
+    OutputManager.ShowDualLayerArray(sqareArray);
 
     int minSum = int.MaxValue;
     int rowIndex = 0;
@@ -80,11 +80,12 @@ void ExampleFiftySix()
         }
         if (sum < minSum)
         {
-            rowIndex = row;
+            rowIndex = row + 1;
             minSum = sum;
         }
+    Console.WriteLine($"№ {rowIndex}\nCумма элементов {minSum}");
     }
-    Console.WriteLine($"Индекс строки с наименьшей суммой {rowIndex}\nCумма элементов {minSum}");
+    Console.WriteLine($"Строка с наименьшей суммой № {rowIndex}\nCумма элементов {minSum}");
 }
 
 void ExampleFiftyEigth()
@@ -95,30 +96,51 @@ void ExampleFiftyEigth()
 
     const int MIN_RANDOM = 0;
     const int MAX_RANDOM = 10;
+    const string MARK_RESULT_ONE_MATRIX = "результат A х B\n";
+    const string MARK_RESULT_TWO_MATRIX = "результат B х A\n";
 
-    int sizeOne = GetPositiveInt("Введите размер №1 матриц: ");
-    int sizeTwo = GetPositiveInt("Введите размер №2 матриц: ");
+    int sizeOneX = GetPositiveInt("Введите размер X матрицы A : ");
+    int sizeOneY = GetPositiveInt("Введите размер Y матрицы A : ");
+    int sizeTwoX = GetPositiveInt("Введите размер x матрицы B : ");
+    int sizeTwoY = GetPositiveInt("Введите размер Y матрицы B : ");
 
-    int[,] matrixOne = new int[sizeOne, sizeTwo];
-    int[,] matrixTwo = new int[sizeTwo, sizeOne];
+    int[,] matrixOne = new int[sizeOneX, sizeOneY];
+    int[,] matrixTwo = new int[sizeTwoX, sizeTwoY];
 
     FillArrayRandomNumbers(matrixOne, MIN_RANDOM, MAX_RANDOM);
     FillArrayRandomNumbers(matrixTwo, MIN_RANDOM, MAX_RANDOM);
 
-    long[,] matrixResult = GetMatrixMultiplication(matrixOne, matrixTwo);
-    long[,] matrixResultTwo = GetMatrixMultiplication(matrixTwo, matrixOne);
-
-
-    OutputManager<int>.ShowDualLayerArrayWithIndex(matrixOne, "матрица №1\n");
+    OutputManager.ShowDualLayerArray(matrixOne, "матрица A\n");
 
     Console.WriteLine();
-    OutputManager<int>.ShowDualLayerArrayWithIndex(matrixTwo, "матрица №2\n");
+    OutputManager.ShowDualLayerArray(matrixTwo, "матрица B\n");
 
-    Console.WriteLine();
-    OutputManager<long>.ShowDualLayerArrayWithIndex(matrixResult, "результат A х B\n");
 
-    Console.WriteLine();
-    OutputManager<long>.ShowDualLayerArrayWithIndex(matrixResultTwo, "результат B х A\n");
+    if (matrixOne.GetLength(1) == matrixTwo.GetLength(0))
+    {
+        long[,] matrixResult = GetMatrixMultiplication(matrixOne, matrixTwo);
+
+        Console.WriteLine();
+        OutputManager.ShowDualLayerArray(matrixResult, MARK_RESULT_ONE_MATRIX);
+    }
+    else
+    {
+        Console.WriteLine(MARK_RESULT_ONE_MATRIX);
+        Console.WriteLine("произведение не существует");
+    }
+
+    if (matrixTwo.GetLength(1) == matrixOne.GetLength(0))
+    {
+        long[,] matrixResultTwo = GetMatrixMultiplication(matrixTwo, matrixOne);
+
+        Console.WriteLine();
+        OutputManager.ShowDualLayerArray(matrixResultTwo, MARK_RESULT_TWO_MATRIX);
+    }
+    else
+    {
+        Console.WriteLine(MARK_RESULT_TWO_MATRIX);
+        Console.WriteLine("произведение не существует");
+    }
 }
 
 void ExampleSixty()
@@ -133,7 +155,7 @@ void ExampleSixty()
 
     int[,,] array3D = Create3DMassive(sideOne, sideTwo, sideThree);
 
-    OutputManager<int>.ShowThrityLayerArrayWithIndex(array3D, "3D массив ", true);
+    OutputManager.ShowThripleLayerArray(array3D, "3D массив ", true);
 }
 
 void ExampleSixtyTwo()
@@ -155,10 +177,10 @@ void ExampleSixtyTwo()
         else if (x < y && x + y >= sizeArrayX - 1) x++;
         else if (x >= y && x + y > sizeArrayX - 1) y--;
         else x--;
-        ++numberForSpiralArray;
+        numberForSpiralArray++;
     }
 
-    OutputManager<int>.ShowDualLayerArrayWithIndex(spiralArray, "Спираль ");
+    OutputManager.ShowDualLayerArray(spiralArray, "Спиралька ");
 }
 
 
@@ -185,6 +207,7 @@ uint GetNumberExercise(int first, int second, int third, int four, int five)
 void SortRowDualLayerArray(int[,] inputArray, bool IsLowToHigh = true)
 {
     int index = inputArray.GetLength(0);
+    int temp;
     for (int i = 0; i < inputArray.GetLength(0); i++)
     {
         for (int j = 0; j < inputArray.GetLength(1); j++)
@@ -195,7 +218,7 @@ void SortRowDualLayerArray(int[,] inputArray, bool IsLowToHigh = true)
                 {
                     if (inputArray[i, k] > inputArray[i, k + 1])
                     {
-                        int temp = inputArray[i, k];
+                        temp = inputArray[i, k];
                         inputArray[i, k] = inputArray[i, k + 1];
                         inputArray[i, k + 1] = temp;
                     }
@@ -204,7 +227,7 @@ void SortRowDualLayerArray(int[,] inputArray, bool IsLowToHigh = true)
                 {
                     if (inputArray[i, k] < inputArray[i, k + 1])
                     {
-                        int temp = inputArray[i, k];
+                        temp = inputArray[i, k];
                         inputArray[i, k] = inputArray[i, k + 1];
                         inputArray[i, k + 1] = temp;
                     }
@@ -212,25 +235,23 @@ void SortRowDualLayerArray(int[,] inputArray, bool IsLowToHigh = true)
             }
         }
     }
-}
 
-// void SortRow(int[] array, bool IsLowToHigh = true)
-// {
-//     // TODO: 
-// }
+}
 
 long[,] GetMatrixMultiplication(int[,] arrayA, int[,] arrayB)
 {
-    int size = arrayA.GetLength(0);
-    long[,] result = new long[size, size];
+    int sizeOne = arrayA.GetLength(0);
+    int sizeTwo = arrayB.GetLength(1);
+
+    long[,] result = new long[sizeOne, sizeTwo];
     long tmp;
 
-    for (int firstSize = 0; firstSize < size; firstSize++)
+    for (int firstSize = 0; firstSize < sizeOne; firstSize++)
     {
-        for (int secondSize = 0; secondSize < size; secondSize++)
+        for (int secondSize = 0; secondSize < sizeTwo; secondSize++)
         {
             tmp = 0;
-            for (int i = 0; i < arrayA.GetLength(1); i++)
+            for (int i = 0; i < arrayA.GetLength(0); i++)
             {
                 tmp += arrayA[firstSize, i] * arrayB[i, secondSize];
             }
@@ -292,6 +313,13 @@ int[,,] Create3DMassive(int size1, int size2, int size3, int minRandom = 0, int 
     return array;
 }
 
+// void CreateSpiralMatrix()
+// {
+//     // TODO: 
+//     Console.WriteLine("Здесь могла быть ваша реклама )))");
+//     // some humor )
+// }
+
 void EndProgramm()
 {
     Console.Write("\n" + "Press any key...");
@@ -302,11 +330,10 @@ void EndProgramm()
 }
 
 
-class OutputManager<T>
+class OutputManager
 {
     const int SPACE_FOR_PRINT = 5;
-
-    public static void ShowDualLayerArrayWithIndex(T[,] inputArray, string text = "", bool IsWithIndex = false)
+    public static void ShowDualLayerArray<T>(T[,] inputArray, string text = "", bool IsWithIndex = false)
     {
         Console.WriteLine(text);
         for (int row = 0; row < inputArray.GetLength(0); row++)
@@ -323,7 +350,7 @@ class OutputManager<T>
         }
     }
 
-    public static void ShowThrityLayerArrayWithIndex(T[,,] inputArray, string text = "", bool IsWithIndex = false)
+    public static void ShowThripleLayerArray<T>(T[,,] inputArray, string text = "", bool IsWithIndex = false)
     {
         Console.WriteLine(text);
         for (int z = 0; z < inputArray.GetLength(2); z++)
