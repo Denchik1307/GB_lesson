@@ -25,7 +25,6 @@ void ExerciseNumber()
             Console.WriteLine("Непредвиденная ошибка ввода");
             break;
     }
-
     EndProgramm();
 }
 
@@ -77,8 +76,8 @@ void ExampleSixtySix()
     int m = GetPositiveInt("Введите целое число M: ");
     int n = GetPositiveInt("Введите целое число N: ");
 
-    ChangeColor(GREEN); 
-    if (m<n)
+    ChangeColor(GREEN);
+    if (m < n)
     {
         Console.WriteLine($"M = {m}; N = {n} => {CountSumNaturalDigit(m, n)}");
     }
@@ -86,7 +85,7 @@ void ExampleSixtySix()
     {
         Console.WriteLine("N должно быть больше M ");
     }
-    
+
 
     ChangeColor(WHITE);
 }
@@ -95,23 +94,17 @@ void ExampleSixtyEigth()
 {
     ChangeColor(RED);
     Console.WriteLine("\n" +
-    @"\n Задача 64: Задайте значение N. Напишите программу, 
-    которая выведет все натуральные числа в промежутке от N до 1. 
-    Выполнить с помощью рекурсии." + "\n");
+    @"\n Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. 
+    Даны два неотрицательных числа m и n.
+    m = 2, n = 3 -> A(m,n) = 9
+    m = 3, n = 2 -> A(m,n) = 29" + "\n");
     ChangeColor(YELLOW);
 
     int m = GetPositiveInt("Введите целое число M:");
     int n = GetPositiveInt("Введите целое N:");
 
     ChangeColor(GREEN);
-    if (m>n)
-    {
-        Console.WriteLine($"m = {m}, n = {n} => A({m},{n})={AkkermanFunction(m, n)}");
-    }
-    else
-    {
-        Console.WriteLine("M должно быть больше N ");
-    }
+    Console.WriteLine($"m = {m}, n = {n} => A({m},{n})={AkkermanFunction(m, n)}");
 
     ChangeColor(WHITE);
 }

@@ -1,92 +1,100 @@
-﻿using System;
-using System.Diagnostics;
-using System.Collections;
+﻿// Задача 58: Задайте две матрицы. Напишите программу,
+// которая будет находить произведение двух матриц.
 
 
 
 
-int m = SingleLinkedList.Math(12);
-// int height = int.Parse(Console.ReadLine()!);
+int lengthOneX = GetPositiveInt("Введите количество строк первой матрицы  : ");
+int lengthOneY = GetPositiveInt("Введите количество столбцов первой матрицы : ");
+int lengthTwoX = GetPositiveInt("Введите количество строк второй матрицы : ");
+int lengthTwoY = GetPositiveInt("Введите количество столбцов второй матрицы : ");
 
-// for (int i = 0; i <= height; i++)
-// {
-//     for (int j = 0; j < height - i; j++)
-//     {
-//         Console.Write(" ");
-//     }
-//     for (int k = 0; k <= i * 2; k++)
-//     {
-//         Console.Write("*");
-//     }
-//     Console.Write("\n");
-// }
-Stopwatch timer = new Stopwatch();
+int[,] matrixOne = new int[lengthOneX, lengthOneY];
+int[,] matrixTwo = new int[lengthTwoX, lengthTwoY];
 
-long[] arrayA = CreateArray(2_000_000);
-FillArray(arrayA, max: 20, min: 0);
-LinkedList<int> list = new LinkedList<int>();
-foreach (int num in arrayA)
+FillMatrixRandomNumbers(matrixOne, 0, 20);
+FillMatrixRandomNumbers(matrixTwo, 0, 20);
+
+ShowDualLayerArray(matrixOne, "\nматрица первая\n");
+
+ShowDualLayerArray(matrixTwo, "\nматрица вторая\n");
+
+Console.WriteLine("\nпроизведение матриц A на Б");
+if (matrixOne.GetLength(1) == matrixTwo.GetLength(0))
 {
-    list.AddLast(num);
+    int[,] matrixResult = CompositionMatrix(matrixOne, matrixTwo);
+    ShowDualLayerArray(matrixResult);
 }
-timer.Start();
-LinkedList<int> revList = LinkedListRevert(list);
-timer.Stop();
-Console.WriteLine(timer.Elapsed);
-
-// ShowArray(list);
-Console.WriteLine();
-// ShowArray(revList);
-
-
-long[] CreateArray(long sizeArray) => new long[sizeArray];
-
-LinkedList<int> LinkedListRevert(LinkedList<int> list)
+else
 {
-    LinkedList<int> reversedList = new LinkedList<int>();
-    foreach (int i in list)
+    Console.WriteLine("произведение не существует");
+}
+
+Console.WriteLine("произведение матриц Б на А");
+if (matrixTwo.GetLength(1) == matrixOne.GetLength(0))
+{
+    int[,] matrixResult = CompositionMatrix(matrixTwo, matrixOne);
+    ShowDualLayerArray(matrixResult);
+}
+else
+{
+    Console.WriteLine("произведение не существует");
+}
+
+int GetPositiveInt(string massage)
+{
+    Console.WriteLine(massage);
+    int input;
+    while (!int.TryParse(Console.ReadLine(), out input) ^ input < 0)
     {
-        reversedList.AddFirst(i);
+        Console.Write("Ошибка\n" + massage);
     }
-    return reversedList;
+    return input;
 }
 
-void FillArray(long[] arrayForFill, int min = 0, int max = 10)
+int[,] CompositionMatrix(int[,] inputMatrixOne, int[,] inputMatrixTwo)
 {
-    for (int i = 0; i < arrayForFill.GetLength(0); i++)
+    int[,] compositionMatrix = new int[inputMatrixOne.GetLength(0), inputMatrixTwo.GetLength(1)];
+
+    for (int i = 0; i < inputMatrixOne.GetLength(0); i++)
     {
-        arrayForFill[i] = new Random().Next(min, max);
+        for (int j = 0; j < inputMatrixTwo.GetLength(1); j++)
+        {
+            compositionMatrix[i, j] = 0;
+            for (int k = 0; k < inputMatrixOne.GetLength(1); k++)
+            {
+                compositionMatrix[i, j] += inputMatrixOne[i, k] * inputMatrixTwo[k, j];
+            }
+        }
+    }
+    return compositionMatrix;
+}
+
+void FillMatrixRandomNumbers(int[,] array, int minValue, int maxValue)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
     }
 }
 
-// void BinarySortInsert(int[] array, short n)
-// {
-//     int x;
-//     int left;
-//     int right;
-//     int sred;
-//     for (int i = 1; i < n; i++)
-//         if (array[i - 1] > array[i])
-//         {
-//             x = array[i];
-//             left = 0;
-//             right = i - 1;
-//             do
-//             {
-//                 sred = (left + right) >> 1;
-//                 if (array[sred] < x) left = sred + 1;
-//                 else right = sred - 1;
-//             } while (left <= right);
-//             for (int j = i - 1; j >= left; j--)
-//                 array[j + 1] = array[j];
-//             array[left] = x;
-//         }
-// }
-
-// void ShowArray(LinkedList<int> arrayForShow)
-// {
-//     foreach (int n in arrayForShow)
-//     {
-//         Console.Write($"{n} ");
-//     }
-// }
+void ShowDualLayerArray(int[,] inputArray, string text = "", bool IsWithIndex = false)
+{
+    const int SPACE_FOR_PRINT = 5;
+    Console.WriteLine(text);
+    for (int row = 0; row < inputArray.GetLength(0); row++)
+    {
+        for (int col = 0; col < inputArray.GetLength(1); col++)
+        {
+            Console.Write($"{inputArray[row, col],SPACE_FOR_PRINT}");
+            if (IsWithIndex)
+            {
+                Console.Write($" ({row},{col}) ");
+            }
+        }
+        Console.WriteLine();
+    }
+}

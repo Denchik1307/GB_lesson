@@ -258,7 +258,6 @@ long[,] GetMatrixMultiplication(int[,] arrayA, int[,] arrayB)
             result[firstSize, secondSize] = tmp;
         }
     }
-
     return result;
 }
 
